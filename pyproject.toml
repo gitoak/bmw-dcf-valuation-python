@@ -1,0 +1,70 @@
+[build-system]
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"
+
+[project]
+name = "ds"
+version = "0.1.0"
+description = "Minimal data science template with uv, Ruff, Jupyter, VS Code, and GitHub Codespaces"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12,<3.13"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+
+# Runtime-Dependencies (für Skripte + Notebooks)
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "ipykernel",   # Jupyter-Kernel für VS Code / Codespaces
+    "yfinance",
+    "plotly",
+    "python-dotenv",
+]
+
+# Dev-Dependencies nach PEP 735 als dependency-groups
+# uv liest [dependency-groups].dev automatisch als "dev" Gruppe und synced sie standardmäßig mit. 
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "nbqa",
+    "nbstripout",
+    "nox",
+]
+
+# Ruff-Konfiguration (Linter + Formatter)
+# Ruff kann auch direkt Jupyter-Notebooks linten & formatieren. 
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Verzeichnisse ausschließen, die uns nicht interessieren
+exclude = [
+    ".git",
+    ".venv",
+    ".vscode",
+    "data",
+    "notebooks/.ipynb_checkpoints",
+]
+
+[tool.ruff.lint]
+# Typische Rule-Sets: E,F,W = pycodestyle/pyflakes, B=bugbear, I=imports, UP=pyupgrade
+select = ["E", "F", "W", "B", "I", "UP"]
+# Zeilenlänge macht der Formatter, nicht der Linter
+ignore = [
+    "E501",  # line too long – wird vom Formatter gelöst
+    "E203",  # Kompatibilität mit Black-ähnlichem Stil
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
+
+# Notebooks dürfen etwas "schmutziger" sein (print/assert ok)
+[tool.ruff.lint.per-file-ignores]
+"notebooks/*.ipynb" = ["T201", "S101"]

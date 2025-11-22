@@ -1,0 +1,37 @@
+{
+  // Tests
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+
+  // Typ-Checking eher entspannt
+  "python.analysis.typeCheckingMode": "basic",
+
+  // Python-Dateien -> Ruff macht Format + Lint
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    }
+  },
+
+  // Notebooks: optional formatOnSave (viele mögen es aus)
+  "[jupyter-notebook]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": false
+  },
+
+  // Jupyter relativ zum Projekt-Root
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "jupyter.jupyterServerType": "local",
+
+  // Noise reduzieren
+  "files.exclude": {
+    "**/.venv": true,
+    "**/.ruff_cache": true,
+    "**/__pycache__": true
+  }
+}
