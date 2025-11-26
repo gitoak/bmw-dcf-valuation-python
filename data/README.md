@@ -1,21 +1,20 @@
-# Data Layout
+# Financial Data Repository
 
-This repository follows a lightweight version of the Cookiecutter-Data-Science convention:
+This directory stores the raw and processed financial data used in the valuation models.
 
-- `raw/` – immutable source files as delivered by stakeholders or public APIs.
-- `processed/` – intermediate artifacts that are reproducible from `raw/` via notebooks or scripts.
+## Data Sources
+*   **Market Data**: Historical price and volume data (Source: Yahoo Finance).
+*   **Financial Statements**: Income Statement, Balance Sheet, and Cash Flow Statement (Annual & Quarterly).
+*   **Macroeconomic Data**: Risk-Free Rates (e.g., US 10Y Treasury, German Bund).
 
-## Guardrails
+## Directory Structure
+*   `raw/`: Immutable source files (CSV, JSON) fetched from data providers.
+    *   `BMW.DE_*.csv`: Financials for BMW AG.
+    *   `MBG.DE_*.csv`: Financials for Mercedes-Benz Group.
+    *   `VOW3.DE_*.csv`: Financials for Volkswagen AG.
+    *   `P911.DE_*.csv`: Financials for Porsche AG.
+    *   `^TNX.csv`: US Treasury Yield (Risk-Free Rate proxy).
+*   `processed/`: Cleaned and normalized datasets ready for analysis.
 
-1. **Never commit sensitive or large raw data.** Keep `.gitignore` in place and push only metadata-free placeholders (`.gitkeep`, README files, schemas, etc.).
-2. **Document provenance.** Drop a short Markdown file next to every dataset summarizing where it came from and how to reproduce it.
-3. **Make processing reproducible.** Prefer storing code (not binary artifacts) in `src/` or `notebooks/` that knows how to regenerate anything inside `processed/`.
-4. **Use deterministic file names.** Encode date ranges or parameter names in filenames so it is obvious how outputs relate to the inputs.
-5. **Cache responsibly.** If derived datasets are truly huge, keep them locally (or in object storage) and reference them via environment variables or `.env` files instead of committing them.
-
-## Suggested workflow
-
-1. Land new raw data under `data/raw/<source>/<yyyymmdd>/...` and immediately add a short README with context.
-2. Reference raw files from notebooks or ETL scripts using `pathlib.Path("data/raw/...")` so relative paths continue to work inside dev containers and CI.
-3. Write results back under `data/processed/` with clear suffixes such as `_features.parquet`, `_model.pkl`, etc.
-4. When automations (e.g., `make notebooks-run` or `nox -s notebooks`) execute, they should regenerate everything under `data/processed/` from scratch.
+## Data Refresh
+To update the datasets with the latest market information, run the data fetching cells in the main notebook or execute the data pipeline scripts in `src/`.
