@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Date** | November 26, 2025 |
+| **Date** | December 2025 |
 | **Ticker** | BMW.DE (XETRA) |
 | **Sector** | Consumer Cyclical — Auto Manufacturers |
 | **Classification** | Premium Automotive OEM |
