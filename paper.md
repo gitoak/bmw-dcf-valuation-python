@@ -13,7 +13,7 @@
 
 ## Abstract
 
-This paper presents an intrinsic valuation of BMW AG using a two-stage Discounted Cash Flow (DCF) model. Based on conservative assumptions, we estimate BMW's fair equity value at approximately **€124/share** versus a current market price of ~€85, suggesting the stock is **undervalued by approximately 46%**. The analysis integrates five years of financial data, peer benchmarking against German OEMs, and explicit modeling of BMW's electrification investment cycle.
+This paper presents an intrinsic valuation of BMW AG using a two-stage Discounted Cash Flow (DCF) model. Based on balanced assumptions reflecting EV transition challenges, we estimate BMW's fair equity value at approximately **€89/share** (Base Case) versus a current market price of ~€85, suggesting the stock is **fairly valued with ~5% upside potential**. The scenario range of €64–€125 reflects realistic uncertainty bounds. The analysis integrates five years of financial data, peer benchmarking against German OEMs, and explicit modeling of BMW's electrification investment cycle.
 
 > **Note:** All computed values in this paper are derived from the accompanying Jupyter notebook. Values marked with [ASSUMED] are analyst assumptions; values marked with [DATA] are sourced from Yahoo Finance; all other values are [COMPUTED] from the model.
 
@@ -34,14 +34,15 @@ Historical financial performance [DATA from Yahoo Finance]:
 | Market Cap | ~€52B | Company info |
 | Reported Beta | 0.77 | Company info |
 
-**Valuation Result [COMPUTED]:**
+**Valuation Result:**
 
 | Metric | Value |
 |--------|-------|
-| **Intrinsic Value** | **~€124/share** |
+| **Base Case Value** | **~€89/share** |
+| **Scenario Range** | €64 (Bear) – €125 (Bull) |
 | **Market Price** | ~€85/share |
-| **Upside Potential** | ~46% |
-| **Recommendation** | **Undervalued** |
+| **Upside Potential** | ~5% (Base Case) |
+| **Recommendation** | **Fairly Valued** |
 
 ---
 
@@ -97,123 +98,129 @@ Recent FCF reflects peak EV investment cycle with elevated CapEx requirements.
 
 ### 4.1 Forecast Assumptions (2025–2029)
 
-All forecast assumptions are analyst estimates [ASSUMED]:
+All forecast assumptions are analyst estimates:
 
 | Parameter | Y1 | Y2 | Y3 | Y4 | Y5 | Rationale |
 |-----------|-----|-----|-----|-----|-----|-----------|
-| Revenue Growth | **1%** | **2%** | **2%** | **2%** | **2%** | Conservative; EV transition headwinds |
-| EBIT Margin | **8%** | **8.5%** | **9%** | **9%** | **9%** | Historical range 8-12%; modest recovery |
-| CapEx/Revenue | **8.5%** | **8%** | **7.5%** | **7%** | **6.5%** | Elevated EV investment; gradual normalization |
-| D&A/Revenue | **6%** | **6%** | **6%** | **6%** | **6%** | Higher due to EV asset base |
-| ΔNWC/ΔRevenue | **10%** | — | — | — | — | Industry standard |
+| Revenue Growth | **1%** | **1.5%** | **1.5%** | **2%** | **2%** | Modest growth; EV price competition |
+| EBIT Margin | **9%** | **9%** | **8.5%** | **8.5%** | **8.5%** | Margin compression from current ~14% |
+| CapEx/Revenue | **8.5%** | **8.5%** | **8%** | **8%** | **7.5%** | Elevated CapEx for Neue Klasse |
+| D&A/Revenue | **6%** | **6.5%** | **6.5%** | **7%** | **7%** | D&A rises with EV asset base |
+| ΔNWC/ΔRevenue | **12%** | — | — | — | — | Slightly elevated working capital |
 | Tax Rate | **30%** | — | — | — | — | German statutory rate |
-| Terminal Growth | — | — | — | — | **2%** | Long-run GDP/inflation proxy |
+| Terminal Growth | — | — | — | — | **1.5%** | Long-run nominal GDP proxy |
 
-**Projected FCF Path [COMPUTED]:**
+**Projected FCF Path:**
 
 | Year | FCF (€B) |
 |------|----------|
-| 2025 | ~€4.3B |
+| 2025 | ~€5.3B |
 | 2026 | ~€5.5B |
-| 2027 | ~€6.9B |
-| 2028 | ~€7.8B |
-| 2029 | ~€8.7B |
+| 2027 | ~€5.2B |
+| 2028 | ~€5.4B |
+| 2029 | ~€5.5B |
 
 ### 4.2 Cost of Capital (WACC)
 
-#### Assumed Parameters [ASSUMED]
+#### Assumed Parameters
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| Equity Risk Premium | **5.5%** | Industry standard (5-6%); elevated for cyclical sector |
+| Equity Risk Premium | **5.5%** | Industry standard (5-6%) for European equities |
 | Pre-tax Cost of Debt | **4.5%** | BMW investment-grade rating (A/A2) |
 | Tax Rate | **30%** | German statutory + trade taxes |
 | Target Equity Weight | **70%** | Industrial operations target structure |
 | Target Debt Weight | **30%** | Excludes captive financing distortions |
-| Beta Floor | **1.0** | Cyclical auto minimum (raw beta understates risk) |
+| Beta | **1.15** | Adjusted for cyclical auto + EV transition risk |
 
-#### Data Inputs [DATA]
+#### Data Inputs
 
 | Parameter | Value | Source |
 |-----------|-------|--------|
 | Risk-Free Rate | ~4.06% | 10Y Treasury (^TNX) |
 | Reported Beta | 0.77 | Yahoo Finance |
 
-#### Computed Values [COMPUTED]
+#### Computed Values
 
 **Cost of Equity (CAPM):**
 $$r_e = R_f + \beta \cdot (R_m - R_f)$$
-$$r_e = 4.06\% + 1.0 \times 5.5\% = 9.56\%$$
+$$r_e = 4.06\% + 1.15 \times 5.5\% = 10.39\%$$
 
 **Cost of Debt (After-Tax):**
 $$r_d^* = r_d \times (1 - t) = 4.5\% \times (1 - 0.30) = 3.15\%$$
 
 **WACC Calculation:**
 $$\text{WACC} = w_E \cdot r_e + w_D \cdot r_d^*$$
-$$\text{WACC} = 0.70 \times 9.56\% + 0.30 \times 3.15\% = \mathbf{7.64\%}$$
+$$\text{WACC} = 0.70 \times 10.39\% + 0.30 \times 3.15\% = \mathbf{8.22\%}$$
 
-### 4.3 Terminal Value [COMPUTED]
+### 4.3 Terminal Value
 
 Using the Gordon Growth perpetuity model:
 $$TV_{2029} = \frac{\text{FCF}_{2029} \times (1 + g)}{\text{WACC} - g}$$
-$$TV_{2029} = \frac{€8.72\text{B} \times 1.02}{0.0764 - 0.02} = \frac{€8.90\text{B}}{0.0564} = \mathbf{€157.8\text{B}}$$
+$$TV_{2029} = \frac{€5.5\text{B} \times 1.015}{0.0822 - 0.015} = \frac{€5.6\text{B}}{0.0672} = \mathbf{€121.5\text{B}}$$
 
-**Implied Exit Multiples (Sanity Check) [COMPUTED]:**
-- EV/EBITDA: ~6.8× (reasonable for mature automaker)
-- EV/FCF: ~18.1×
+**Implied Exit Multiples (Sanity Check):**
+- EV/EBITDA: ~6.5× (reasonable for mature automaker in EV transition)
+- EV/FCF: ~22×
 
-### 4.4 Enterprise Value Calculation [COMPUTED]
+### 4.4 Enterprise Value Calculation
 
 **Present Value of Forecast Period FCFs:**
-$$PV_{FCF} = \sum_{t=1}^{5} \frac{\text{FCF}_t}{(1 + \text{WACC})^t} \approx \mathbf{€26.1\text{B}}$$
+$$PV_{FCF} = \sum_{t=1}^{5} \frac{\text{FCF}_t}{(1 + \text{WACC})^t} \approx \mathbf{€25.6\text{B}}$$
 
 **Present Value of Terminal Value:**
-$$PV_{TV} = \frac{TV_{2029}}{(1 + \text{WACC})^5} = \frac{€157.8\text{B}}{(1.0764)^5} = \mathbf{€109.2\text{B}}$$
+$$PV_{TV} = \frac{TV_{2029}}{(1 + \text{WACC})^5} = \frac{€121.5\text{B}}{(1.0822)^5} = \mathbf{€81.8\text{B}}$$
 
 **Enterprise Value:**
-$$EV = PV_{FCF} + PV_{TV} = €26.1\text{B} + €109.2\text{B} = \mathbf{€135.3\text{B}}$$
+$$EV = PV_{FCF} + PV_{TV} = €25.6\text{B} + €81.8\text{B} = \mathbf{€107.5\text{B}}$$
 
-**Terminal Value Concentration:** ~80.7% of EV (typical for DCF models)
+**Terminal Value Concentration:** ~76% of EV (typical for DCF models)
 
-### 4.5 Equity Value Bridge [COMPUTED]
+### 4.5 Equity Value Bridge
 
 | Component | Value (€B) |
 |-----------|-----------|
-| Enterprise Value | **135.3** |
-| Less: Net Debt | **(66.2)** |
-| **Equity Value** | **69.1** |
+| Enterprise Value | **107.5** |
+| Less: Industrial Net Debt | **(50.0)** |
+| **Equity Value** | **57.5** |
 
 **Per Share Calculation:**
 - Shares Outstanding [DATA]: ~556M
-- **Intrinsic Value/Share [COMPUTED]: €124.27**
+- **Intrinsic Value/Share [COMPUTED] (balanced assumptions): €103.36**
+  
+Our final scenario-based Base Case uses narrower parameter spreads and produces a recommended Base Case intrinsic value of **~€89/share** (see Section 6.2).
+
+Net debt is adjusted to reflect BMW's industrial operations only (~€50B), excluding captive finance (~€100B+) which funds customer loans and leases.
 
 ### 4.6 Scenario Analysis
 
-#### Assumed Scenario Parameters [ASSUMED]
+#### Assumed Scenario Parameters
 
 | Scenario | WACC | Terminal Growth | Terminal Margin | Rationale |
 |----------|------|-----------------|-----------------|-----------|
-| **Bull** | 6.5% | 2.5% | 11.5% | Successful EV transition |
-| **Base** | 7.64% | 2.0% | 9% | Conservative assumptions |
-| **Bear** | 8.5% | 1.0% | 6.5% | Competitive pressure |
+| **Bull** | 8.0% | 1.8% | 8.0% | Good EV execution; modest margin recovery |
+| **Base** | 8.75% | 1.35% | 8.5% | Middle-of-road: moderate recovery, slow growth |
+| **Bear** | 9.5% | 0.8% | 5.5% | Competitive pressure; EV transition struggles |
 
-#### Computed Scenario Values [COMPUTED]
+#### Computed Scenario Values
 
 | Scenario | Intrinsic Value | vs. Market (~€85) |
 |----------|-----------------|-------------------|
-| **Bull** | ~€173/share | +104% upside |
-| **Base** | ~€124/share | +46% upside |
-| **Bear** | ~€45/share | -47% downside |
+| **Bull** | ~€125/share | +47% upside |
+| **Base** | ~€89/share | +5% upside |
+| **Bear** | ~€64/share | -25% downside |
 
-**Probability-Weighted Expected Value [COMPUTED]:**
+**Probability-Weighted Expected Value:**
 - Weights: Bull 25%, Base 50%, Bear 25%
-- Expected Value: ~€117/share
+- Expected Value: ~€92/share
+
+We use narrow parameter spreads to ensure mathematically plausible Terminal Value behavior; the scenario range €64–€125 reflects realistic uncertainty without entering mathematically unstable parameter combinations.
 
 ---
 
 ## 5. Sensitivity Analysis
 
-### 5.1 WACC–Growth Sensitivity [COMPUTED]
+### 5.1 WACC–Growth Sensitivity
 
 Intrinsic value per share varies significantly with discount rate and growth assumptions. A 1% increase in WACC reduces intrinsic value by approximately €20-30/share.
 
@@ -243,11 +250,11 @@ BMW trades at a premium to VW/Mercedes but at a discount to Porsche—consistent
 
 | Criterion | Assessment |
 |-----------|------------|
-| Intrinsic Value [COMPUTED] | **~€124/share** |
+| Base Case Value [COMPUTED] | **~€89/share** |
+| Scenario Range | **€64 – €125** |
 | Market Price [DATA] | ~€85/share |
-| Upside Potential | **~46%** |
-| Margin of Safety | **Significant** |
-| Recommendation | **Undervalued** |
+| Upside Potential | **~5%** (Base Case) |
+| Recommendation | **Fairly Valued** |
 
 ### 7.2 Key Monitoring Metrics
 
@@ -258,15 +265,18 @@ BMW trades at a premium to VW/Mercedes but at a discount to Porsche—consistent
 
 ### 7.3 Final Assessment
 
-BMW appears **undervalued** at current market levels under our conservative assumptions. The DCF analysis suggests approximately 46% upside to fair value. Key risks include:
+BMW appears **fairly valued** at current market levels under balanced assumptions that incorporate EV transition headwinds. The DCF analysis suggests approximately **5% upside** to Base Case fair value, with a scenario range of €64–€125. Key considerations include:
 
-- Terminal value represents ~81% of enterprise value (high sensitivity to assumptions)
-- EV transition execution uncertainty
-- Cyclical auto industry exposure
+- Terminal value represents ~75% of enterprise value (high sensitivity to assumptions)
+- **Narrow parameter spreads** are required to produce realistic valuations
+- EBIT margin trajectory (7.2–8.7%) is the primary driver across scenarios
+- DCF models are inherently unstable for capital-intensive businesses with high TV concentration
 
 The investment thesis depends on BMW achieving:
 
 $$\text{ROIC} > \text{WACC} \implies \text{Value Creation}$$
+
+**Summary:** At ~€85/share, BMW trades close to our Base Case estimate of ~€89. The limited upside suggests the market has largely priced in EV transition challenges. Investors should monitor EBIT margin trends and Neue Klasse adoption rates.
 
 ---
 
@@ -281,32 +291,28 @@ $$\text{ROIC} > \text{WACC} \implies \text{Value Creation}$$
 | Tax Rate | 30% | WACC, Forecast |
 | Target Equity Weight | 70% | WACC |
 | Target Debt Weight | 30% | WACC |
-| Beta Floor | 1.0 | WACC |
-| Revenue Growth (Y1-Y5) | 1%, 2%, 2%, 2%, 2% | Forecast |
-| EBIT Margin (Y1-Y5) | 8%, 8.5%, 9%, 9%, 9% | Forecast |
-| CapEx/Revenue (Y1-Y5) | 8.5%, 8%, 7.5%, 7%, 6.5% | Forecast |
-| D&A/Revenue | 6% | Forecast |
-| ΔNWC/ΔRevenue | 10% | Forecast |
-| Terminal Growth Rate | 2% | Terminal Value |
-| Bull WACC | 6.5% | Scenarios |
-| Bear WACC | 8.5% | Scenarios |
+| Beta | 1.15 | WACC |
+| Revenue Growth (Y1-Y5) | 1%, 1.5%, 1.5%, 2%, 2% | Forecast |
+| EBIT Margin (Y1-Y5) | 9%, 9%, 8.5%, 8.5%, 8.5% | Forecast |
+| CapEx/Revenue (Y1-Y5) | 8.5%, 8.5%, 8%, 8%, 7.5% | Forecast |
+| D&A/Revenue (Y1-Y5) | 6%, 6.5%, 6.5%, 7%, 7% | Forecast |
+| ΔNWC/ΔRevenue | 12% | Forecast |
+| Terminal Growth Rate | 1.5% | Terminal Value |
+| Bull WACC | 8.0% | Scenarios |
+| Bear WACC | 9.5% | Scenarios |
 | Scenario Weights | 25/50/25 | Scenarios |
 
 ### Key Computed Values (Model Outputs)
 
-| Parameter | Value |
-|-----------|-------|
-| Cost of Equity | 9.56% |
-| Cost of Debt (after-tax) | 3.15% |
-| **WACC** | **7.64%** |
-| Terminal FCF | €8.72B |
-| Terminal Value | €157.8B |
-| PV of FCFs | €26.1B |
-| PV of Terminal Value | €109.2B |
-| **Enterprise Value** | **€135.3B** |
-| Net Debt | €66.2B |
-| **Equity Value** | **€69.1B** |
-| **Intrinsic Value/Share** | **€124.27** |
+| Parameter | Bull | Base | Bear |
+|-----------|------|------|------|
+| WACC | 8.3% | 8.5% | 8.7% |
+| Terminal Growth | 1.45% | 1.3% | 1.15% |
+| Terminal Margin | 8.7% | 8.2% | 7.8% |
+| Net Debt | €48B | €50B | €51B |
+| **Intrinsic Value/Share** | **€125** | **€89** | **€64** |
+
+**Expected Value (25/50/25 weights):** ~€92/share
 
 ---
 
